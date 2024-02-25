@@ -1,5 +1,5 @@
-// Get a random number between 1 and deck length *incl. reversed cards in deck*
-const max = 156;
+// Get a random number between 1 and deck length
+const max = 78;
 
 export async function getRandomCard(fail = false) {
   const randomUrl = `https://www.random.org/integers/?num=1&min=0&max=${max}&col=1&base=10&format=plain&rnd=new`;

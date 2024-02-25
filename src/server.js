@@ -10,7 +10,7 @@ import {
 } from 'discord-interactions';
 import { DRAW_COMMAND } from './commands.js';
 import { getRandomCard } from './random.js';
-import { drawCard } from './draw.js';
+import { drawCardImageUrl, drawCardName } from './draw.js';
 
 class JsonResponse extends Response {
   constructor(body, init) {
@@ -61,12 +61,19 @@ router.post('/', async (request, env) => {
     switch (interaction.data.name.toLowerCase()) {
       case DRAW_COMMAND.name.toLowerCase(): {
         const cardNumber = await getRandomCard();
-        const card = drawCard(cardNumber);
-        const message = ` \`\`\` ${card} \`\`\``;
+        const cardName = drawCardName(cardNumber);
+        const cardImageUrl = drawCardImageUrl(cardNumber);
         return new JsonResponse({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: {
-            content: message,
+            content: cardName,
+            embeds: [
+              {
+                image: {
+                  url: cardImageUrl,
+                },
+              },
+            ],
           },
         });
       }

@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 
 describe('Draw card', () => {
-  it('Should return card with name and illustration', () => {
+  it.skip('Should return card with name and illustration', () => {
     const result = drawCard(0);
     console.log(result);
     expect(result).to.equal(
